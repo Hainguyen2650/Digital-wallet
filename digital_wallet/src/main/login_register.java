@@ -6,6 +6,7 @@ import component.PanelLoginAndRegister;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.DecimalFormat;
+import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -29,6 +30,8 @@ public class login_register extends javax.swing.JFrame {
     }
     
     private void init(){
+        ImageIcon img = new ImageIcon(getClass().getClassLoader().getResource("./icon/Logo_Đại_học_Bách_Khoa_Hà_Nội.svg.png"));
+        this.setIconImage(img.getImage());
         layout = new MigLayout("fill, insets 0");
         cover = new PanelCover();
         LoginAndRegister = new PanelLoginAndRegister();// behave opposite to cover
