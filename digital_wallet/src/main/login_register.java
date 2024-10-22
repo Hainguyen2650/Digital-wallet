@@ -11,6 +11,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import java.util.Arrays;
 
 public class login_register extends javax.swing.JFrame {
 
@@ -22,7 +23,7 @@ public class login_register extends javax.swing.JFrame {
     private final double coverSize = 40;
     private final double loginSize = 60;
     private final DecimalFormat df = new DecimalFormat("##0.###");
-    private boolean loginSuccess;
+    private RALfunction function = new RALfunction();
     
     public login_register() {
         initComponents();
@@ -32,10 +33,16 @@ public class login_register extends javax.swing.JFrame {
     private void init(){
         ImageIcon img = new ImageIcon(getClass().getClassLoader().getResource("./icon/Logo_Đại_học_Bách_Khoa_Hà_Nội.svg.png"));
         this.setIconImage(img.getImage());
+        
         layout = new MigLayout("fill, insets 0");
         cover = new PanelCover();
         LoginAndRegister = new PanelLoginAndRegister();// behave opposite to cover
         TimingTarget target = new TimingTargetAdapter(){//create target obj to run animation 
+
+            @Override
+            public void begin() {
+                LoginAndRegister.setAnimate(false);
+            }
 
             @Override
             public void timingEvent(float fraction) {
@@ -84,6 +91,7 @@ public class login_register extends javax.swing.JFrame {
             @Override
             public void end() {// called when event state change
                 isRegister = !isRegister;// switch state everytime event state change
+                LoginAndRegister.setAnimate(true);
             }
             
         };
@@ -99,34 +107,91 @@ public class login_register extends javax.swing.JFrame {
         cover.addEvent(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){// when event is stated, call this
-                if (!animator.isRunning()){
-                    animator.start();
-                    //LoginAndRegister.resetLogin();
-                    //LoginAndRegister.resetRegister();
+
+                if (ae.getActionCommand()=="Back to SIGN IN") {
+                    LoginAndRegister.showLogin(true);
+                    cover.register(true);
+                } else {
+                    if (!animator.isRunning()){
+                        animator.start();
+                        LoginAndRegister.reset();
+                    }
                 }
             }
         });
         
         LoginAndRegister.addEvent(new ActionListener() {
+            private String[] result;
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (ae.getActionCommand()=="SIGN IN") {
-                    String[] loginInfo = LoginAndRegister.getLogin_info();// [username, pass]
-                    //check if login success or not
+                    boolean loginSuccess = function.loginSuccess(LoginAndRegister.getLogin_info());                    
                     if (loginSuccess) {
                         showMessage(Message.MessageType.SUCCESS, "Log in success");
                         //go to main program
                     } else {
-                        showMessage(Message.MessageType.ERROR, "Log in fail");
-                        //noitice
+                        showMessage(Message.MessageType.ERROR, "Incorrect password");
                     }
-                    LoginAndRegister.resetLogin();
+                    LoginAndRegister.reset();
                 }
-                else if (ae.getActionCommand()=="Next (1/3)") {
-                    LoginAndRegister.showAddAcc();
+                else if (ae.getActionCommand()=="Forgot your password ?") {
+                    LoginAndRegister.reset();
+                    LoginAndRegister.showPersonalCheck();
+                    cover.forgotPass();
                 }
-                else if(ae.getActionCommand()=="Forgot your password ?") {
-                    //ask question
+                else if (ae.getActionCommand()=="Next") {
+                    result = function.checkPerson(LoginAndRegister.getPersonalCheck());
+                    if (result[0].equals("true")) {
+                        LoginAndRegister.showAnswerCheck(function.getQuestion(result[1]));
+                    } else {
+                        showMessage(Message.MessageType.ERROR, "Sorry but we can't recognize you");
+                    }
+                }
+                else if (ae.getActionCommand()=="Reset my password") {
+                    if (Arrays.equals(LoginAndRegister.getAnswerCheck(), function.getAnswer(result[1]))){
+                        LoginAndRegister.showResetPass(result[1]);
+                    } else {
+                        showMessage(Message.MessageType.ERROR, "This is not your account");
+                    }
+                }
+                else if (ae.getActionCommand()=="Confirm"){
+                    if (LoginAndRegister.checkResetPass()) {
+                        showMessage(Message.MessageType.SUCCESS, "Your account is updating");
+                        LoginAndRegister.showLogin(true);
+                    } else {
+                        showMessage(Message.MessageType.ERROR, "Please retype your password");
+                    }
+                }
+                else if (ae.getActionCommand()=="Create account") {
+                    result = function.validPerson(LoginAndRegister.getPersonal_info());
+                    if (result[0]=="true"){
+                        LoginAndRegister.showAddAcc();
+                    } else {
+                        showMessage(Message.MessageType.ERROR, result[1]);
+                    }
+                }
+                else if (ae.getActionCommand()=="One more step") {
+                    if (LoginAndRegister.checkAddAcc()){
+                        if (function.validAccount(LoginAndRegister.getAccount_info())){
+                            LoginAndRegister.showQuestion();
+                        } else {
+                            showMessage(Message.MessageType.ERROR, "Invalid username");
+                        }
+                    } else {
+                        showMessage(Message.MessageType.ERROR, "Retype your password");
+                    }
+                }
+                else if (ae.getActionCommand()=="Finish") {
+                    if (function.validQA(LoginAndRegister.getQA_info())) {
+                        showMessage(Message.MessageType.SUCCESS, "Account creates successly");
+                        animator.start();
+                        LoginAndRegister.reset();
+                    } else {
+                        showMessage(Message.MessageType.ERROR, "Invalid questions and answers");
+                    }
+                }
+                else if (ae.getActionCommand()=="Back to personal register"){
+                    LoginAndRegister.showLogin(false);
                 }
             }
         });

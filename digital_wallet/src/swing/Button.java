@@ -49,7 +49,7 @@ public class Button extends JButton {
                     animator.stop();
                 }
                 animator.start();
-            }
+            }            
         });
         TimingTarget target = new TimingTargetAdapter() {
             @Override

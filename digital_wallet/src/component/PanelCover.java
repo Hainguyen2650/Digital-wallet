@@ -67,11 +67,11 @@ public class PanelCover extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 544, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -122,7 +122,7 @@ public class PanelCover extends javax.swing.JPanel {
         layout.setComponentConstraints(description1, "pad 0 " + v + "% 0 " + v + '%');
     }
     
-    private void register(boolean resigter) {
+    public void register(boolean resigter) {
         if (this.isRegister != resigter) {
             if (isRegister) {
                 title.setText("Newbie ?");
@@ -138,6 +138,15 @@ public class PanelCover extends javax.swing.JPanel {
             this.isRegister = resigter;
         }
     }
+    
+    public void forgotPass() {
+        this.isRegister = false;
+        title.setText("Forgot your account");
+        description.setText("Don't worry, we will help you find it");
+        description1.setText("Just remembered your account ?");
+        button.setText("Back to SIGN IN");      
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

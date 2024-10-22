@@ -38,6 +38,10 @@ public class TextField extends JTextField {
     public void setHint(String hint) {
         this.hint = hint;
     }
+    
+    public void setAnimate(boolean b) {
+        this.animate = b;
+    }
 
     private final Animator animator;
     private boolean animateHinText = true;
@@ -48,6 +52,7 @@ public class TextField extends JTextField {
     private Color lineColor = new Color(3, 155, 216);
     private String hint = "";
     private boolean hide = true;
+    private boolean animate = false;
 
     public TextField() {
         setBorder(new EmptyBorder(20, 3, 10, 3));
@@ -56,13 +61,17 @@ public class TextField extends JTextField {
             @Override
             public void mouseEntered(MouseEvent me) {
                 mouseOver = true;
-                repaint();
+                if (animate) {
+                    repaint();
+                }
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
                 mouseOver = false;
-                repaint();
+                if (animate) {
+                    repaint();
+                }
             }
         });
         addFocusListener(new FocusAdapter() {
@@ -175,4 +184,5 @@ public class TextField extends JTextField {
         }
         super.setText(string);
     }
+    
 }
