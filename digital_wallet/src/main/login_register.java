@@ -1,7 +1,7 @@
 package main;
 
 import component.Message;
-import component.PanelCover;
+import component.PanelCoverLoginRegister;
 import component.PanelLoginAndRegister;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class login_register extends javax.swing.JFrame {
 
     private MigLayout layout;
-    private PanelCover cover;
+    private PanelCoverLoginRegister cover;
     private PanelLoginAndRegister LoginAndRegister;
     private boolean isRegister = false;
     private final double addSize = 30;
@@ -35,7 +35,7 @@ public class login_register extends javax.swing.JFrame {
         this.setIconImage(img.getImage());
         
         layout = new MigLayout("fill, insets 0");
-        cover = new PanelCover();
+        cover = new PanelCoverLoginRegister();
         LoginAndRegister = new PanelLoginAndRegister();// behave opposite to cover
         TimingTarget target = new TimingTargetAdapter(){//create target obj to run animation 
 
@@ -124,11 +124,19 @@ public class login_register extends javax.swing.JFrame {
             private String[] result;
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (ae.getActionCommand()=="SIGN IN") {
+                if ("SIGN IN".equals(ae.getActionCommand())) {
                     boolean loginSuccess = function.loginSuccess(LoginAndRegister.getLogin_info());                    
                     if (loginSuccess) {
                         showMessage(Message.MessageType.SUCCESS, "Log in success");
                         //go to main program
+                        java.awt.EventQueue.invokeLater(new Runnable() {
+                            public void run() {
+                                Main mainFrame = new Main();
+                                mainFrame.setLocationRelativeTo(null); 
+                                mainFrame.setVisible(true);
+                            }
+                        });
+                        login_register.this.dispose(); // Close the login window
                     } else {
                         showMessage(Message.MessageType.ERROR, "Incorrect password");
                     }

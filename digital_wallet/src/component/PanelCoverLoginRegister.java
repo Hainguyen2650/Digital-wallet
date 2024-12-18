@@ -12,7 +12,7 @@ import net.miginfocom.swing.MigLayout;
 import swing.ButtonOutLine;
 import java.text.DecimalFormat;
 
-public class PanelCover extends javax.swing.JPanel {
+public class PanelCoverLoginRegister extends javax.swing.JPanel {
 
     private final DecimalFormat df = new DecimalFormat("##0.##");
     private ActionListener event;
@@ -24,7 +24,7 @@ public class PanelCover extends javax.swing.JPanel {
     private boolean isRegister;
     
     
-    public PanelCover() {
+    public PanelCoverLoginRegister() {
         initComponents();
         setOpaque(false);
         layout = new MigLayout("wrap, fill", "[center]", "push[]25[]10[]25[]push");
