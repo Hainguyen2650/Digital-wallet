@@ -4,6 +4,13 @@ package main;
 import java.awt.Color;
 import swing.ScrollBar;
 import com.event.EventMenuSelected;
+import component.DashboardPanel;
+import component.AccountInfoPanel;
+import component.ExpenseReportPanel;
+import component.SavingsFundsPanel;
+import component.TransactionHistoryPanel;
+import component.TransactionPanel;
+
 public class Main extends javax.swing.JFrame {
 
     public Main() {
@@ -14,10 +21,38 @@ public class Main extends javax.swing.JFrame {
         menu2.addEventMenuSelected(new EventMenuSelected(){
             @Override
             public void selected(int index) {
-                System.out.println("Selected Index: " + index);
+                switch (index) {
+                    case 0: // Dashboard
+                        setPanelContent(new DashboardPanel());
+                        break;
+                    case 2: // Transaction
+                        setPanelContent(new TransactionPanel());
+                        break;
+                    case 4: // Account Information
+                        setPanelContent(new AccountInfoPanel());
+                        break;
+                    case 6: // Transaction History
+                        setPanelContent(new TransactionHistoryPanel());
+                        break;
+                    case 8: // Savings Funds
+                        setPanelContent(new SavingsFundsPanel());
+                        break;
+                    case 10: // Expense Report
+                        setPanelContent(new ExpenseReportPanel());
+                        break;
+                }
             }
         });
     }
+    private void setPanelContent(javax.swing.JPanel panel) {
+        panel.setSize(686, 574); 
+        panel.setLocation(0, 0); 
+        form_Home2.removeAll(); 
+        form_Home2.add(panel); 
+        form_Home2.revalidate(); 
+        form_Home2.repaint(); 
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
