@@ -4,12 +4,12 @@ package main;
 import java.awt.Color;
 import swing.ScrollBar;
 import com.event.EventMenuSelected;
-import component.DashboardPanel;
 import component.AccountInfoPanel;
 import component.ExpenseReportPanel;
 import component.SavingsFundsPanel;
 import component.TransactionHistoryPanel;
 import component.TransactionPanel;
+import component.Form_Home;
 
 public class Main extends javax.swing.JFrame {
 
@@ -23,7 +23,7 @@ public class Main extends javax.swing.JFrame {
             public void selected(int index) {
                 switch (index) {
                     case 0: // Dashboard
-                        setPanelContent(new DashboardPanel());
+                        setPanelContent(new Form_Home());
                         break;
                     case 2: // Transaction
                         setPanelContent(new TransactionPanel());
@@ -52,7 +52,7 @@ public class Main extends javax.swing.JFrame {
         form_Home2.revalidate(); 
         form_Home2.repaint(); 
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,7 +61,7 @@ public class Main extends javax.swing.JFrame {
         header2 = new component.Header();
         menu2 = new component.Menu();
         sp = new javax.swing.JScrollPane();
-        form_Home2 = new component.Form.Form_Home();
+        form_Home2 = new component.Form_Home();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -128,7 +128,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private component.Form.Form_Home form_Home2;
+    private component.Form_Home form_Home2;
     private component.Header header2;
     private component.Menu menu2;
     private swing.PanelBorder panelBorder3;
