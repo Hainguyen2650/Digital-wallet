@@ -62,7 +62,7 @@ public class Message extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
-    protected void paintComponent(Graphics grphcs) {
+    protected void paintComponent(Graphics grphcs) {    
         Graphics2D g2 = (Graphics2D) grphcs;
         if (messageType == MessageType.SUCCESS) {
             g2.setColor(new Color(15, 174, 37));
