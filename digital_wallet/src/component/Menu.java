@@ -1,6 +1,6 @@
 package component;
 
-import com.event.EventMenuSelected;
+import component.event.EventMenuSelected;
 import component.model.Model_Menu;
 import java.awt.Color;
 import java.awt.GradientPaint;

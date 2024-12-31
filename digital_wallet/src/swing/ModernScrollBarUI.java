@@ -18,10 +18,6 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
     private static final int THUMB_SIZE = 8;
     private static final Color THUMB_COLOR = Color.BLACK;
 
-    public ModernScrollBarUI() {
-
-    }
-
     @Override
     protected JButton createDecreaseButton(int orientation) {
         return new InvisibleScrollBarButton();

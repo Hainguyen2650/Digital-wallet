@@ -1,9 +1,8 @@
 
 package main;
 
-import java.awt.Color;
-import swing.ScrollBar;
-import com.event.EventMenuSelected;
+import java.awt.Color;  
+import component.event.EventMenuSelected;
 import component.AccountInfoPanel;
 import component.ExpenseReportPanel;
 import component.SavingsFundsPanel;
@@ -17,7 +16,6 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         menu2.initMoving(Main.this);
-        sp.setVerticalScrollBar(new ScrollBar());
         menu2.addEventMenuSelected(new EventMenuSelected(){
             @Override
             public void selected(int index) {
@@ -58,15 +56,11 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder3 = new swing.PanelBorder();
-        header2 = new component.Header();
         menu2 = new component.Menu();
-        sp = new javax.swing.JScrollPane();
         form_Home2 = new component.Form_Home();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-
-        sp.setBorder(null);
 
         javax.swing.GroupLayout panelBorder3Layout = new javax.swing.GroupLayout(panelBorder3);
         panelBorder3.setLayout(panelBorder3Layout);
@@ -75,24 +69,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelBorder3Layout.createSequentialGroup()
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder3Layout.createSequentialGroup()
-                        .addComponent(form_Home2, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(form_Home2, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelBorder3Layout.setVerticalGroup(
             panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder3Layout.createSequentialGroup()
-                .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder3Layout.createSequentialGroup()
-                        .addComponent(sp)
-                        .addContainerGap())
-                    .addComponent(form_Home2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 0, 0)
+                .addComponent(form_Home2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelBorder3Layout.createSequentialGroup()
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -129,9 +113,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.Form_Home form_Home2;
-    private component.Header header2;
     private component.Menu menu2;
     private swing.PanelBorder panelBorder3;
-    private javax.swing.JScrollPane sp;
     // End of variables declaration//GEN-END:variables
 }

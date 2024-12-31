@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
+import java.awt.event.MouseAdapter; 
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JButton;
@@ -29,7 +29,7 @@ public class Button extends JButton {
     private Animator animator;
     private int targetSize;
     private float animatSize;
-    private Point pressedPoint;
+    private Point pressedPoint; 
     private float alpha;
     private Color effectColor = new Color(255, 255, 255);
 
