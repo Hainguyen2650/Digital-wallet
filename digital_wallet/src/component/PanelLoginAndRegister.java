@@ -23,6 +23,8 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     private TextField txtUserName;
     private TextField txtEmail;
     private TextField citizenID;
+    private TextField address;
+    private TextField phonenumber;
     private PasswordField txtPass;
     private PasswordField cf_txtPass;
     private TextField gender;
@@ -72,7 +74,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     }
 
     private void initRegister(){
-        register.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]10[]10[]40[]push"));// center the layout and set the space to add component in []
+        register.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]10[]10[]10[]10[]40[]push"));// center the layout and set the space to add component in []
         JLabel label = new JLabel("Personal information");// new label
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(12, 157, 201));
@@ -95,6 +97,14 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         citizenID = new TextField();
         citizenID.setLabelText("CitizenID (CCCD)");
         register.add(citizenID, "w 60%");
+        //address
+        address = new TextField();
+        address.setLabelText("Address");
+        register.add(address, "w 60%");
+        //phonenumber
+        phonenumber = new TextField();
+        phonenumber.setLabelText("Phone number");
+        register.add(phonenumber, "w 60%");
         //email
         txtEmail = new TextField();// text box to enter user email
         txtEmail.setLabelText("Email");
@@ -288,9 +298,9 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         forgotGender.setLabelText("Gender");
         forgotGender.setHint("Male/Female");
         personalCheck.add(forgotGender, "w 60%");
-        //username / citizenID / email
+        //username / citizenID / email/ PhoneNumber
         forgotId = new TextField();
-        forgotId.setLabelText("Username / CitizenId / Email (Choose one you remember)");
+        forgotId.setLabelText("Username /CitizenId /Email /Phone number (Choose one you remember)");
         personalCheck.add(forgotId, "w 60%");
 
         //Next button
@@ -446,6 +456,8 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         gender.setText("");
         citizenID.setText("");
         txtEmail.setText("");
+        address.setText("");
+        phonenumber.setText("");
         txtUserName.setText("");
         txtPass.setText("");
         cf_txtPass.setText("");
@@ -471,12 +483,14 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     }
     
     public String[] getPersonal_info() {// use this method to get register info
-        String[] info = new String[5];
+        String[] info = new String[7];
         info[0] = txtFullName.getText();
         info[1] = DoB.getText();
         info[2] = gender.getText();
         info[3] = citizenID.getText();
         info[4] = txtEmail.getText();
+        info[5] = address.getText();
+        info[6] = phonenumber.getText();
         return info;
     }
     

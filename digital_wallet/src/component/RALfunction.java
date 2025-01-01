@@ -41,7 +41,7 @@ public class RALfunction {
     public static String DB_URL = "jdbc:mysql://localhost:3306/db_demo";
     public static String USER_NAME = "root";
     public static String PASSWORD = "";
-    private static String[] data = new String[13];
+    private static String[] data = new String[15];
 
 
     public static boolean registerData () {
@@ -51,7 +51,7 @@ public class RALfunction {
             conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD);
 
             // Insert data
-            String sql = "INSERT INTO registration (FullName, DateOfBirth, Gender, CitizenID, Email, username, password, Q1, Q2, Q3, A1, A2, A3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO registration (FullName, DateOfBirth, Gender, CitizenID, Email, Address, PhoneNumber, username, password, Q1, Q2, Q3, A1, A2, A3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pr = conn.prepareStatement(sql);
 
             pr.setString(1, data[0]);//fullname
@@ -59,14 +59,16 @@ public class RALfunction {
             pr.setString(3, data[2]);//Gender
             pr.setString(4, data[3]);//CitizenID
             pr.setString(5, data[4]);//Email
-            pr.setString(6, data[5]);//username
-            pr.setString(7, data[6]);//password
-            pr.setString(8, data[7]);//Q1
-            pr.setString(9, data[8]);//Q2
-            pr.setString(10, data[9]);//Q3
-            pr.setString(11, data[10]);//A1
-            pr.setString(12, data[11]);//A2
-            pr.setString(13, data[12]);//A3
+            pr.setString(6, data[5]);//Address
+            pr.setString(7, data[6]);//PhoneNumber
+            pr.setString(8, data[7]);//username
+            pr.setString(9, data[8]);//password
+            pr.setString(10, data[9]);//Q1
+            pr.setString(11, data[10]);//Q2
+            pr.setString(12, data[11]);//Q3
+            pr.setString(13, data[12]);//A1
+            pr.setString(14, data[13]);//A2
+            pr.setString(15, data[14]);//A3
 
             int rowsInserted = pr.executeUpdate();
             if (rowsInserted > 0) {
@@ -90,12 +92,20 @@ public class RALfunction {
     }
 
     public static String[] validPerson(String[] s) {
+        String fullname = s[0];
         String dob = s[1];
         String gender = s[2];
         String citizenID = s[3];
         String email = s[4];
+        String address = s[5];
+        String phone = s[6];
         String[] result = new String[2];
         result[0] = "false";
+        
+        if (fullname.equals("")) {
+            result[1] = "Please let us know your name";
+            return result;
+        }
 
         // Check DoB format
         if (!dob.matches("\\d{2}/\\d{2}/\\d{4}")) {
@@ -118,10 +128,27 @@ public class RALfunction {
             result[1] = "Please insert your email address";
             return result;
         }
+        
+        if (address.equals("")) {
+            result[1] = "Please insert your address";
+            return result;
+        }
+        
+        if (phone.equals("")) {
+            result[1] = "Please insert your phone number";
+            return result;
+        }
+        
+        try {
+            Integer.parseInt(phone);
+        } catch(NumberFormatException e) {
+            result[1] = "Phone number only contain number";
+            return result;
+        }
 
         // Check for duplicate CitizenID or Email
         try (Connection conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD)) {
-            String sql = "SELECT CitizenID, Email FROM registration";
+            String sql = "SELECT CitizenID, Email, PhoneNumber FROM registration";
 
             try (PreparedStatement pr = conn.prepareStatement(sql);
                  ResultSet r1 = pr.executeQuery()) {
@@ -135,9 +162,13 @@ public class RALfunction {
                         result[1] = "Duplicate Email found.";
                         return result;
                     }
+                    if (r1.getString("Phone").equals(phone)) {
+                        result[1] = "Duplicate Phone number found.";
+                        return result;
+                    }
                 }
                 // insert data
-                for (int i=0; i<5; i++) {
+                for (int i=0; i<7; i++) {
                     data[i] = s[i];
                 }
             }
@@ -165,8 +196,8 @@ public class RALfunction {
                     }
                 }
                 // insert data
-                data[5] = Username;
-                data[6] = Password;
+                data[7] = Username;
+                data[8] = Password;
             }
         } catch (SQLException e) {
             return false;
@@ -181,7 +212,7 @@ public class RALfunction {
             }
         }
         for (int i=0; i<6; i++) {
-            data[i+7] = s[i];
+            data[i+9] = s[i];
         }
         return registerData();
     }
@@ -189,11 +220,11 @@ public class RALfunction {
     public static String[] loginSuccess(String[] s) {
         String Username = s[0];
         String Password = s[1];
-        String[] result = new String[6];
+        String[] result = new String[8];
 
         // Check for username is in the database
         try (Connection conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD)) {
-            String sql = "SELECT FullName, DateOfBirth, Gender, CitizenID, Email, UserName, Password FROM registration";
+            String sql = "SELECT FullName, DateOfBirth, Gender, CitizenID, Email, Address, PhoneNumber, UserName, Password FROM registration";
             try (PreparedStatement pr = conn.prepareStatement(sql);
                  ResultSet r1 = pr.executeQuery()) {
 
@@ -205,6 +236,8 @@ public class RALfunction {
                         result[3] = r1.getString("Gender");
                         result[4] = r1.getString("CitizenID");
                         result[5] = r1.getString("Email");
+                        result[6] = r1.getString("PhoneNumber");
+                        result[7] = r1.getString("Address");
                         return result;
                     }
                 }
@@ -226,13 +259,13 @@ public class RALfunction {
 
         // Check ID if it is UserName or CitizenID or Email
         try (Connection conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD)) {
-            String sql = "SELECT FullName, DateOfBirth, Gender, UserName, CitizenID, Email FROM registration";
+            String sql = "SELECT FullName, DateOfBirth, Gender, UserName, CitizenID, Email, PhoneNumber FROM registration";
             try (PreparedStatement pr = conn.prepareStatement(sql);
                  ResultSet r1 = pr.executeQuery()) {
 
                 while (r1.next()) {
                     if (r1.getString("FullName").equals(FullName) && r1.getString("DateOfBirth").equals(DoB) && r1.getString("Gender").equals(Gender)) {
-                        if (r1.getString("CitizenID").equals(ID) || r1.getString("Email").equals(ID) || r1.getString("UserName").equals(ID)) {                   
+                        if (r1.getString("CitizenID").equals(ID) || r1.getString("Email").equals(ID) || r1.getString("UserName").equals(ID) || r1.getString("PhoneNumber").equals(ID)) {                   
                             result[1] = r1.getString("username");
                             return result;
                         }
