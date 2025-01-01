@@ -8,6 +8,7 @@ import com.event.EventMenuSelected;
 public class Main extends javax.swing.JFrame {
     private String[] loginInfo;
     public Main(String[] loginInfo) {
+        this.loginInfo = null;
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         menu2.initMoving(Main.this);
