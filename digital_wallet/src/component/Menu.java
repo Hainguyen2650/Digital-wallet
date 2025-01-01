@@ -32,13 +32,15 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("transaction", "Transaction", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("account", "Account infomation", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("account", "Account Infomation", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("transaction_history", "Transaction history", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("transaction_history", "Transaction History", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("funds", "Savings funds", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("funds", "Savings Funds", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-
+        listMenu1.addItem(new Model_Menu("report", "Expense Report", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
+        
         
     }
     @SuppressWarnings("unchecked")
