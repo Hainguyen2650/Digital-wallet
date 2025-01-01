@@ -128,12 +128,10 @@ public class login_register extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent ae) {
                 if (null!=ae.getActionCommand()) switch (ae.getActionCommand()) {
                     case "SIGN IN" -> {
-                        String[] loginInfo = LoginAndRegister.getLogin_info();
-                        boolean loginSuccess = function.loginSuccess(loginInfo);
-                        String username = loginInfo[0];
-                        if (loginSuccess) {
+                        String[] loginInfo = function.loginSuccess(LoginAndRegister.getLogin_info());
+                        if (loginInfo[0]!=null) {
                             showMessage(Message.MessageType.SUCCESS, "Log in success");
-                            //go to main program
+                            //go to main program. Insert loginInfo as parameter
                             java.awt.EventQueue.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {

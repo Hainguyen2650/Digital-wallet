@@ -186,26 +186,34 @@ public class RALfunction {
         return registerData();
     }
 
-    public static Boolean loginSuccess(String[] s) {
+    public static String[] loginSuccess(String[] s) {
         String Username = s[0];
         String Password = s[1];
+        String[] result = new String[6];
 
         // Check for username is in the database
         try (Connection conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD)) {
-            String sql = "SELECT UserName, Password FROM registration";
+            String sql = "SELECT FullName, DateOfBirth, Gender, CitizenID, Email, UserName, Password FROM registration";
             try (PreparedStatement pr = conn.prepareStatement(sql);
                  ResultSet r1 = pr.executeQuery()) {
 
                 while (r1.next()) {
                     if (r1.getString("UserName").equals(Username) && r1.getString("Password").equals(Password)) {
-                        return true;
+                        result[0] = r1.getString("FullName");
+                        result[1] = r1.getString("UserName");
+                        result[2] = r1.getString("DateOfBirth");
+                        result[3] = r1.getString("Gender");
+                        result[4] = r1.getString("CitizenID");
+                        result[5] = r1.getString("Email");
+                        return result;
                     }
                 }
         }
         } catch (SQLException e) {
-            return false;
+            e.printStackTrace();
         }
-        return false;
+        result[0] = null;
+        return result;
     }
 
     public String[] checkPerson(String[] s) {
