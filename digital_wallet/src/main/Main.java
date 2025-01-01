@@ -4,28 +4,9 @@ package main;
 import java.awt.Color;
 import swing.ScrollBar;
 import com.event.EventMenuSelected;
-
 public class Main extends javax.swing.JFrame {
-    
-    private String fullName;
-    private String userName;
-    private String dateOfBirth;
-    private String gender;
-    private String citizenID;
-    private String email;
-    private String phoneNumber;
-    private String address;
-    public Main(String[] loginInfo) {
 
-        this.fullName = loginInfo[0];
-        this.userName = loginInfo[1];
-        this.dateOfBirth = loginInfo[2];
-        this.gender = loginInfo[3];
-        this.citizenID = loginInfo[4];
-        this.email = loginInfo[5];
-        this.phoneNumber = loginInfo[6];
-        this.address = loginInfo[7];
-        
+    public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         menu2.initMoving(Main.this);
@@ -106,6 +87,7 @@ public class Main extends javax.swing.JFrame {
      
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                new Main().setVisible(true);
             }
         });
     }

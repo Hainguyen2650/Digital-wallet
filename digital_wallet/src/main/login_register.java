@@ -136,7 +136,7 @@ public class login_register extends javax.swing.JFrame {
                             java.awt.EventQueue.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Main mainFrame = new Main(loginInfo);
+                                    Main mainFrame = new Main();
                                     mainFrame.setLocationRelativeTo(null);
                                     mainFrame.setVisible(true);
                                 }
