@@ -1,19 +1,32 @@
 
-package component.Form;
+package component;
 
-import component.model.Model_Card;
-import java.awt.Color;
-import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-public class Form_Home extends javax.swing.JPanel {
 
-   
-    public Form_Home() {
-        initComponents();
-        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/icon/stock.png")), "Stock Total", "$200000", "Increased by 60%"));
-        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/icon/profit.png")), "Total Profit", "$15000", "Increased by 25%"));
-        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/icon/flag.png")), "Unique Visitors", "$300000", "Increased by 70%"));
+public class Form_Home extends JPanel {
+    public String fullName;
+    public String userName;
+    public String dateOfBirth;
+    public String gender;
+    public String citizenID;
+    public String email;
+    public String phoneNumber;
+    public String address;
+    public String password;
+
+    public Form_Home(String[] loginInfo) {
+        this.fullName = loginInfo[0];
+        this.userName = loginInfo[1];
+        this.dateOfBirth = loginInfo[2];
+        this.gender = loginInfo[3];
+        this.citizenID = loginInfo[4];
+        this.email = loginInfo[5];
+        this.phoneNumber = loginInfo[6];
+        this.address = loginInfo[7];
+        this.password = loginInfo[8];
+        JLabel label = new JLabel("Dashboard");
+        add(label);
     }
 
     @SuppressWarnings("unchecked")
@@ -21,25 +34,10 @@ public class Form_Home extends javax.swing.JPanel {
     private void initComponents() {
 
         Panel = new javax.swing.JLayeredPane();
-        card1 = new component.Form.Card();
-        card2 = new component.Form.Card();
-        card3 = new component.Form.Card();
         panelBorder1 = new swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
 
         Panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-
-        card1.setColor1(new java.awt.Color(142, 142, 250));
-        card1.setColor2(new java.awt.Color(123, 123, 245));
-        Panel.add(card1);
-
-        card2.setColor1(new java.awt.Color(186, 123, 247));
-        card2.setColor2(new java.awt.Color(167, 94, 236));
-        Panel.add(card2);
-
-        card3.setColor1(new java.awt.Color(241, 208, 62));
-        card3.setColor2(new java.awt.Color(211, 184, 61));
-        Panel.add(card3);
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -88,9 +86,6 @@ public class Form_Home extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane Panel;
-    private component.Form.Card card1;
-    private component.Form.Card card2;
-    private component.Form.Card card3;
     private javax.swing.JLabel jLabel1;
     private swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables

@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
         
 public class RALfunction {
 //  public String[] validPerson(String[] data) {
@@ -139,20 +137,12 @@ public class RALfunction {
             return result;
         }
         
-        try {
-            Integer.parseInt(phone);
-        } catch(NumberFormatException e) {
-            result[1] = "Phone number only contain number";
-            return result;
-        }
 
         // Check for duplicate CitizenID or Email
         try (Connection conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD)) {
             String sql = "SELECT CitizenID, Email, PhoneNumber FROM registration";
-
             try (PreparedStatement pr = conn.prepareStatement(sql);
                  ResultSet r1 = pr.executeQuery()) {
-
                 while (r1.next()) {
                     if (r1.getString("CitizenID").equals(citizenID)) {
                         result[1] = "Duplicate CitizenID found.";
@@ -162,7 +152,7 @@ public class RALfunction {
                         result[1] = "Duplicate Email found.";
                         return result;
                     }
-                    if (r1.getString("Phone").equals(phone)) {
+                    if (r1.getString("PhoneNumber").equals(phone)) {
                         result[1] = "Duplicate Phone number found.";
                         return result;
                     }
@@ -173,6 +163,7 @@ public class RALfunction {
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             result[1] = "There are some problem with our database";
             return result;
         }
@@ -220,7 +211,7 @@ public class RALfunction {
     public static String[] loginSuccess(String[] s) {
         String Username = s[0];
         String Password = s[1];
-        String[] result = new String[8];
+        String[] result = new String[9];
 
         // Check for username is in the database
         try (Connection conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD)) {
@@ -238,6 +229,7 @@ public class RALfunction {
                         result[5] = r1.getString("Email");
                         result[6] = r1.getString("PhoneNumber");
                         result[7] = r1.getString("Address");
+                        result[8] = r1.getString("Password");
                         return result;
                     }
                 }
@@ -341,3 +333,4 @@ public class RALfunction {
         }
     } 
 }
+    

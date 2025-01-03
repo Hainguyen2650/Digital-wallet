@@ -4,19 +4,24 @@ package main;
 import java.awt.Color;
 import swing.ScrollBar;
 import com.event.EventMenuSelected;
-public class Main extends javax.swing.JFrame {
-    
-    private String fullName;
-    private String userName;
-    private String dateOfBirth;
-    private String gender;
-    private String citizenID;
-    private String email;
-    private String phoneNumber;
-    private String address;
-    
-    public Main(String[] loginInfo) {
+import component.AccountInfoPanel;
+//import component.ExpenseReportPanel;
+//import component.SavingsFundsPanel;
+import component.TransactionHistoryPanel;
+import component.TransactionPanel;
+import component.Form_Home;
 
+public class Main extends javax.swing.JFrame {
+    public String fullName;
+    public String userName;
+    public String dateOfBirth;
+    public String gender;
+    public String citizenID;
+    public String email;
+    public String phoneNumber;
+    public String address;
+    public String password;
+    public Main(String[] loginInfo) {
         this.fullName = loginInfo[0];
         this.userName = loginInfo[1];
         this.dateOfBirth = loginInfo[2];
@@ -25,6 +30,9 @@ public class Main extends javax.swing.JFrame {
         this.email = loginInfo[5];
         this.phoneNumber = loginInfo[6];
         this.address = loginInfo[7];
+        this.password = loginInfo[8];
+
+        
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         menu2.initMoving(Main.this);
@@ -32,10 +40,35 @@ public class Main extends javax.swing.JFrame {
         menu2.addEventMenuSelected(new EventMenuSelected(){
             @Override
             public void selected(int index) {
-                System.out.println("Selected Index: " + index);
+                switch (index) {
+                    case 0: // Dashboard
+                        setPanelContent(new Form_Home(loginInfo));
+                        break;
+                    case 2: // Transaction
+                        setPanelContent(new TransactionPanel(loginInfo));
+                        
+                        //System.out.println("Transaction");
+                        break;
+                    case 4: // Account Information
+                        setPanelContent(new AccountInfoPanel());
+                        break;
+                    case 6: // Transaction History
+                        setPanelContent(new TransactionHistoryPanel());
+                        break;
+                    
+                }
             }
         });
     }
+    private void setPanelContent(javax.swing.JPanel panel) {
+        //panel.setSize(686, 574); 
+        //panel.setLocation(0, 0); 
+        form_Home2.removeAll(); 
+        form_Home2.add(panel); 
+        form_Home2.revalidate(); 
+        form_Home2.repaint(); 
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,7 +77,7 @@ public class Main extends javax.swing.JFrame {
         header2 = new component.Header();
         menu2 = new component.Menu();
         sp = new javax.swing.JScrollPane();
-        form_Home2 = new component.Form.Form_Home();
+        form_Home2 = new component.Form_Home(loginInfo);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -60,6 +93,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder3Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
                         .addComponent(form_Home2, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -105,12 +139,13 @@ public class Main extends javax.swing.JFrame {
      
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private component.Form.Form_Home form_Home2;
+    private component.Form_Home form_Home2;
     private component.Header header2;
     private component.Menu menu2;
     private swing.PanelBorder panelBorder3;
