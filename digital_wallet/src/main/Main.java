@@ -12,6 +12,7 @@ import component.TransactionPanel;
 import component.Form_Home;
 
 public class Main extends javax.swing.JFrame {
+    
     public String fullName;
     public String userName;
     public String dateOfBirth;
@@ -21,7 +22,10 @@ public class Main extends javax.swing.JFrame {
     public String phoneNumber;
     public String address;
     public String password;
+    private component.Form_Home form_Home2;
+    
     public Main(String[] loginInfo) {
+        
         this.fullName = loginInfo[0];
         this.userName = loginInfo[1];
         this.dateOfBirth = loginInfo[2];
@@ -31,8 +35,8 @@ public class Main extends javax.swing.JFrame {
         this.phoneNumber = loginInfo[6];
         this.address = loginInfo[7];
         this.password = loginInfo[8];
+        this.form_Home2 = new Form_Home(loginInfo);
 
-        
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         menu2.initMoving(Main.this);
@@ -77,7 +81,6 @@ public class Main extends javax.swing.JFrame {
         header2 = new component.Header();
         menu2 = new component.Menu();
         sp = new javax.swing.JScrollPane();
-        form_Home2 = new component.Form_Home(loginInfo);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
