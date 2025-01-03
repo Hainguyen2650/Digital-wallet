@@ -148,7 +148,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private component.Form_Home form_Home2;
     private component.Header header2;
     private component.Menu menu2;
     private swing.PanelBorder panelBorder3;

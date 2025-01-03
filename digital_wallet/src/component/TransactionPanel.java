@@ -76,7 +76,7 @@ public class TransactionPanel extends JPanel {
 
         jLabel1.setText("Thong tin tai khoan ");
 
-        jLabel3.setText("So tai khoan: "+userID);
+        jLabel3.setText("So tai khoan: "+citizenID);
 
         jLabel4.setText("So du kha dung: "+userBal);
 
@@ -197,7 +197,7 @@ public class TransactionPanel extends JPanel {
                 .addGap(101, 101, 101))
         );
 
-        jLabel4.getAccessibleContext().setAccessibleName(userID);
+        jLabel4.getAccessibleContext().setAccessibleName(citizenID);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed

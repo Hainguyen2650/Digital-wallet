@@ -52,6 +52,7 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                           <Component id="form_Home2" min="-2" pref="686" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="sp" min="-2" pref="14" max="-2" attributes="0"/>
@@ -96,7 +97,10 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
         </Container>
-        <Component class="component.Form.Form_Home" name="form_Home2">
+        <Component class="component.Form_Home" name="form_Home2">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Main_form_Home2"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
